@@ -10,6 +10,9 @@ import android.widget.EditText;
 
 public class Activity2 extends Activity {
 
+	private EditText txtUsername;
+	private Button btnOk;
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
@@ -17,14 +20,25 @@ public class Activity2 extends Activity {
 		setContentView(R.layout.main2);
 		
 		
-		Button btnOk = (Button)findViewById(R.id.btnOk);
+		btnOk = (Button)findViewById(R.id.btnOk);
+		txtUsername = (EditText) findViewById(R.id.txtUsername);
+		
+		/*
+		 * Get data from original Activity
+		 * 
+		 * Extract bundle object from origin intent
+		 */
+		Bundle extras = getIntent().getExtras();
+		if(extras != null){
+			txtUsername.setHint(extras.getString("Name"));
+		}
+		
 		btnOk.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				EditText txtUsername = (EditText) findViewById(R.id.txtUsername);
 				String username = txtUsername.getText().toString();
 				
 				/*
-				 * Returning data from an Intent
+				 * Returning data to the origin activity using Intents
 				 * 
 				 * setResult() sends the data back to the origin, the constants 
 				 * RESULT_OK or RESULT_CANCELLED are needed along an Intent object

@@ -47,19 +47,19 @@ public class MainActivity extends Activity {
 	// Linking to Activity2 using an Intent
 	public boolean onKeyDown(int keyCode, KeyEvent event){
 		
-		if(keyCode == KeyEvent.KEYCODE_DPAD_UP){
+		if(keyCode == KeyEvent.KEYCODE_DPAD_LEFT){
 			
 			// starting activity by its intent filter name as defined in the manifest file
 			startActivity(new Intent("com.jrmoran.Activity2"));
 		}
 		
-		if(keyCode == KeyEvent.KEYCODE_DPAD_DOWN){
+		if(keyCode == KeyEvent.KEYCODE_DPAD_RIGHT){
 			// starting activity by its class name. This is limited to activities within 
 			// the same project
 			startActivity(new Intent(this, Activity2.class));
 		}
 		
-		if(keyCode == KeyEvent.KEYCODE_DPAD_CENTER){
+		if(keyCode == KeyEvent.KEYCODE_DPAD_DOWN){
 			/*
 			 * Get data from another activity, this request is identified by an integer 1
 			 * 
@@ -68,13 +68,28 @@ public class MainActivity extends Activity {
 			 */
 			startActivityForResult(new Intent(this, Activity2.class), 1);
 		}
+		
+		if(keyCode == KeyEvent.KEYCODE_DPAD_CENTER){
+			/*
+			 * Pass data to the target activity
+			 * 
+			 * A bundle is a dictionary data structure that stores key/value pairs
+			 * This is added to the intent that's passed to the target activity
+			 */
+			Intent intent = new Intent(this, Activity2.class);
+			Bundle extras = new Bundle();
+			extras.putString("Name", "Jaime");
+			intent.putExtras(extras);
+			startActivityForResult(intent, 1);
+		}
 		return false;
 	}
 	
 	// Callback to handle data returned from another activity
 	public void onActivityResult(int reqCode, int resCode, Intent intent){
-		if(reqCode == 1 && resCode == RESULT_OK){
-			Toast.makeText(this, intent.getData().toString(), Toast.LENGTH_SHORT).show();
+		String msg = intent.getData().toString();
+		if(reqCode == 1 && resCode == RESULT_OK && !msg.isEmpty()){
+			Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
 		}
 	}
 }
