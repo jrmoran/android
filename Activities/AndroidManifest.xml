@@ -13,6 +13,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Activity2"
+        		  android:label="Activity 2">
+        	<intent-filter>
+        		<action android:name="com.jrmoran.Activity2"/>
+        		<category android:name="android.intent.category.DEFAULT"/>
+        	</intent-filter>
+        </activity>
 
     </application>
 </manifest>
