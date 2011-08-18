@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	
@@ -45,6 +46,7 @@ public class MainActivity extends Activity {
 	
 	// Linking to Activity2 using an Intent
 	public boolean onKeyDown(int keyCode, KeyEvent event){
+		
 		if(keyCode == KeyEvent.KEYCODE_DPAD_UP){
 			
 			// starting activity by its intent filter name as defined in the manifest file
@@ -56,6 +58,23 @@ public class MainActivity extends Activity {
 			// the same project
 			startActivity(new Intent(this, Activity2.class));
 		}
+		
+		if(keyCode == KeyEvent.KEYCODE_DPAD_CENTER){
+			/*
+			 * Get data from another activity, this request is identified by an integer 1
+			 * 
+			 * If the request code is set to -1 no result is obtained. 
+			 * This is the equivalent startActivity()
+			 */
+			startActivityForResult(new Intent(this, Activity2.class), 1);
+		}
 		return false;
+	}
+	
+	// Callback to handle data returned from another activity
+	public void onActivityResult(int reqCode, int resCode, Intent intent){
+		if(reqCode == 1 && resCode == RESULT_OK){
+			Toast.makeText(this, intent.getData().toString(), Toast.LENGTH_SHORT).show();
+		}
 	}
 }
