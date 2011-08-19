@@ -4,9 +4,9 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     >
-<TextView  
+<TextView
     android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
+	android:layout_height="wrap_content"  
     android:text="@string/hello"
     />
 <Button 
@@ -30,6 +30,12 @@
 <Button 
 	android:id="@+id/btnContact"
 	android:text="Choose Contact"
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+	/>
+<Button 
+	android:id="@+id/btnWebView"
+	android:text="Open Web View"
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content"
 	/>

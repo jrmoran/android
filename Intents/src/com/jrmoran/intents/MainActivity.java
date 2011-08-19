@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	
-	Button btnBrowser, btnCall, btnMap, btnContact;
+	Button btnBrowser, btnCall, btnMap, btnContact, btnWebView;
 	
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +77,32 @@ public class MainActivity extends Activity {
 				Intent intent = new Intent(android.content.Intent.ACTION_PICK);
 				intent.setType(ContactsContract.Contacts.CONTENT_TYPE);
 				startActivityForResult(intent, 1);
+			}
+		});
+        
+        btnWebView = (Button) findViewById(R.id.btnWebView);
+        btnWebView.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				
+				/*
+				 * Visiting a web site on a web view using intent filters in the manifest
+				 * file
+				 * 
+				 * action name: com.jrmoran.Browser
+				 * 
+				 * category must be "android.intent.category.DEFAULT" so the activity can
+				 * be called from other activities. 
+				 * 
+				 * Since the activity expects data to start with the prefix "http" the
+				 * data scheme is set "http"
+				 * 
+				 * Because a web view requires the app to connect to the web, permission is
+				 * required
+				 * 
+				 *     uses-permission: "android.permission.INTERNET"
+				 */
+				startActivity(new Intent("com.jrmoran.Browser", 
+										  Uri.parse("http://i.reddit.com")));
 			}
 		});
     }
